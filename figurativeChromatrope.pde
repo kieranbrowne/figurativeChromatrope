@@ -43,7 +43,7 @@ void draw () {
   }
   
   if(!preview) {
-    
+    savedFrames = 0;
     //background(0);
     drawSlide(slide1,points1,0,true);
     drawSlide(slide2,points2,0,true);
@@ -86,6 +86,7 @@ void draw () {
     popMatrix();
 
 
+    if(savedFrames == 0) frameCount=0;
     
     if(savedFrames < 360) {
       saveFrame("frame-#####.png");
