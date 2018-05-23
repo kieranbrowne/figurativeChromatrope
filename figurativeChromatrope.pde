@@ -9,6 +9,7 @@ ArrayList<Point> points2 = new ArrayList<Point>();
 int scene = 0;
 int savedFrames = 0;
 int frame = 0;
+int numFrames = 12;
 boolean preview = false;
 
 PGraphics slide1;
@@ -20,8 +21,8 @@ void setup () {
   cp5 = new ControlP5(this);
   cp5.addSlider("frame")
      .setPosition(10,10)
-     .setRange(0,17)
-     .setNumberOfTickMarks(18)
+     .setRange(0,numFrames-1)
+     .setNumberOfTickMarks(numFrames)
      ;
   cp5.addToggle("preview")
      .setPosition(10,30)
@@ -52,13 +53,13 @@ void draw () {
     
     pushMatrix();
     translate(width/2,height/2);
-    rotate(radians((360/18)*frame));
+    rotate(radians((360/numFrames)*frame));
     image(slide1, -width/2, -height/2); 
     popMatrix();
     
     pushMatrix();
     translate(width/2,height/2);
-    rotate(-radians((360/18)*frame));
+    rotate(-radians((360/numFrames)*frame));
     image(slide2, -width/2, -height/2); 
     popMatrix();
     
@@ -119,10 +120,10 @@ void drawSlide(PGraphics slide,ArrayList<Point> content) {
 void mousePressed() {
   if(!preview) {
     PVector p = new PVector(mouseX-width/2, mouseY-height/2);
-    p.rotate(-radians((360/18)*frame));
+    p.rotate(-radians((360/numFrames)*frame));
     points1.add(new Point(p.x,p.y));
-    p.rotate(radians((360/18)*frame));
-    p.rotate(radians((360/18)*frame));
+    p.rotate(radians((360/numFrames)*frame));
+    p.rotate(radians((360/numFrames)*frame));
     points2.add(new Point(p.x,p.y));
   }
   //println(points1);
@@ -143,6 +144,6 @@ class Point {
   void display(PGraphics pg) {
     pg.noStroke();
     pg.fill(255);
-    pg.ellipse(width/2 + this.x, height/2 + this.y, 3, 3);
+    pg.ellipse(width/2 + this.x, height/2 + this.y, 2, 2);
   } 
 }
